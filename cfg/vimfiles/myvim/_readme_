@@ -1,0 +1,126 @@
+"=========================================
+"       __|__        |            |      
+"   \   __|__     ---|---       \ | /    
+"      ___|___   ____|____   |---------| 
+"   \  |-----|       |       |  |---|  | 
+"      | --- |  -----|-----  |  |___|  | 
+"   /  | ---_|       |       |        _| 
+"                                         
+"         http://www.qfshare.info         
+"=========================================
+"  by lilfieng < leelifeng at gmail.com >
+"  version 1.0                            
+"  last change 23/12/10 16:33:46 
+"=========================================
+
+"====== 文件结构 ======
+"- myvim文件夹下分主文件和分文件，分文件命名规则为主文件名加下划线加分文件名。主分文件均以vim后缀结尾。主文件中会载入所有分文件，$HOME目录下的vimrc.my中会载入主文件。
+"- vimrc.vim保存vimrc的配置，其中map和abbrev被分列到单独的分文件中。
+
+
+"===== vimrc.vim =====
+set nocompatible
+"兼容性设置，与VI最大程度的兼容
+
+set history=50
+"保存历史记录，没必要100+，不怎么会用到10+以前的命令
+
+filetype plugin on
+
+filetype indent on
+
+set autoread
+"当文件有改变时自动文件
+
+set mouse=a
+
+" = map the shortcut key beginner
+let mapleader =","
+let g:mapleader =","
+
+" = Statusline
+set scrolloff=7
+set laststatus=2
+set statusline=\%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
+
+" = Syntax Enable
+syntax enable
+syntax on
+
+"-------Window and ColorScheme------
+if has("gui_running")
+  set guioptions-=m "To Remove menubar
+  set guioptions-=T  "To  Remove toolbar
+  "set guioptions-=r "To Remove v_scroll bar 
+
+  "colorscheme github
+   colorscheme wombat
+  "colorscheme CodeFactoryv3
+  "colorscheme ego
+  "colorscheme trogdor
+else 
+  set background=grey
+  colorscheme zellner
+endif
+
+autocmd bufenter * :syntax sync fromstart
+
+if has("gui_running")
+  set cursorline
+  hi cursorline guibg=#333333
+  set cursorcolumn
+  hi cursorcolumn guibg=#333333
+endif
+
+" = FileFormats
+set ffs=unix,dos,mac
+
+" = buffer
+try
+  set switchbuf=usetab
+  set showtabline=2
+catch
+endtry
+
+" = backups
+set nobackup
+set nowritebackup
+set noswapfile
+
+" = fix the backspace
+set backspace=eol,start,indent
+
+" = line break
+set linebreak
+set textwidth=0
+
+" = wrap
+set wrap
+
+" = abbreve menu
+set completeopt=menu
+
+" = map and abbrev files for vim
+" == iabc command to delete all abbrevs in insert mode
+if Mysys()=="win32"
+  source $VIM/vimfiles/myvim/vimrc_map.vim
+  source $VIM/vimfiles/myvim/vimrc_abbrev.vim
+elseif Mysys()=="unix"
+  source ~/.vim/myvim/vimrc_map.vim
+  source ~/.vim/myvim/vimrc_abbrev.vim
+elseif Mysys()=="mac"
+  source ~/vimfiles/vimrc_map.vim
+  source ~/vimfiles/vimrc_abbrev.vim
+endif
+
+
+==== vimrc_map.vim ====
+
+==== vimrc_abbrev.vim ====
+
+
+===== funs.vim =====
+
+==== funs_common.vim ====
+
+==== funs_tdf.vim ====
